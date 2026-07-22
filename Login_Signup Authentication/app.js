@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path=require('path')
 const session = require('express-session')
-const PORT = 4444;
+const port = 4444;
 const MongoStore = require('connect-mongo').default;
 const mongoose=require('mongoose')
 
@@ -44,8 +44,8 @@ app.get('/logout', (req, res)=>{
 })
 mongoose.connect(process.env.MONGO_PATH)
 .then(() => {
-   app.listen(PORT, () => {
-    console.log(`http://localhost:`+PORT);
+   app.listen(port, () => {
+    console.log(`http://localhost:`+port);
 });
 })
 .catch(err => {

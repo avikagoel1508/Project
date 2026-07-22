@@ -1,0 +1,399 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(-45deg,#6a11cb,#2575fc,#5b86e5,#36d1dc);
+    background-size:400% 400%;
+
+    animation:gradient 15s ease infinite;
+
+    overflow:hidden;
+}
+
+@keyframes gradient{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+.container{
+
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* ================= CARD ================= */
+
+.card,
+.profile-card{
+
+    width:400px;
+
+    padding:45px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+    0 25px 45px rgba(0,0,0,.25);
+
+    animation:floatCard 5s ease-in-out infinite;
+
+    transition:.35s;
+}
+
+.profile-card{
+
+    text-align:center;
+}
+
+.card:hover,
+.profile-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 30px 55px rgba(0,0,0,.35);
+}
+
+/* Floating animation */
+
+@keyframes floatCard{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+
+/* ================= HEADINGS ================= */
+
+h1{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+
+    letter-spacing:.5px;
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#f2f2f2;
+
+    margin-bottom:30px;
+
+    font-size:15px;
+}
+
+/* ================= FORM ================= */
+
+form{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+/* ================= INPUT ================= */
+
+input{
+
+    margin-bottom:18px;
+
+    padding:15px 18px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+
+    font-size:15px;
+
+    transition:.35s;
+}
+
+input::placeholder{
+
+    color:#f0f0f0;
+}
+
+input:focus{
+
+    outline:none;
+
+    border:1px solid white;
+
+    background:rgba(255,255,255,.22);
+
+    box-shadow:
+    0 0 18px rgba(255,255,255,.35);
+
+    transform:scale(1.02);
+}
+
+/* ================= BUTTON ================= */
+
+button{
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:white;
+
+    color:#2575fc;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 12px 25px rgba(0,0,0,.3);
+
+    background:#f8f8f8;
+}
+
+button:active{
+
+    transform:scale(.98);
+}
+
+/* ================= LINKS ================= */
+
+.bottom-text{
+
+    margin-top:22px;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:14px;
+}
+
+.bottom-text a{
+
+    color:#ffffff;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+.bottom-text a:hover{
+
+    color:#ffe082;
+}
+
+/* ================= PROFILE ================= */
+
+.avatar{
+
+    width:110px;
+
+    height:110px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    margin-bottom:25px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:50px;
+
+    color:white;
+
+    background:linear-gradient(135deg,#ffffff,#d9e4ff);
+
+    color:#2575fc;
+
+    box-shadow:
+    0 12px 25px rgba(0,0,0,.3);
+
+    animation:rotateGlow 4s ease-in-out infinite;
+}
+
+@keyframes rotateGlow{
+
+    0%{
+
+        transform:rotate(0deg);
+    }
+
+    50%{
+
+        transform:rotate(8deg);
+    }
+
+    100%{
+
+        transform:rotate(0deg);
+    }
+
+}
+
+.profile-card p{
+
+    color:white;
+
+    margin-top:10px;
+
+    margin-bottom:25px;
+
+    font-size:15px;
+}
+
+/* ================= LOGOUT BUTTON ================= */
+
+.logout-btn{
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    color:#2575fc;
+
+    background:white;
+
+    padding:14px 35px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.35s;
+}
+
+.logout-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 12px 25px rgba(0,0,0,.3);
+
+    background:#f3f3f3;
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar{
+
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:white;
+
+    border-radius:20px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:480px){
+
+.card,
+.profile-card{
+
+    width:95%;
+
+    padding:35px 25px;
+}
+
+h1{
+
+    font-size:26px;
+}
+
+.subtitle{
+
+    font-size:14px;
+}
+
+input{
+
+    padding:14px;
+}
+
+button{
+
+    padding:14px;
+}
+
+.avatar{
+
+    width:90px;
+    height:90px;
+
+    font-size:42px;
+}
+
+}

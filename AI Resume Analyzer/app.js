@@ -8,6 +8,7 @@ const session=require('express-session')
 const MongoStore = require('connect-mongo').default;
 const passport=require('./auth/passport')
 
+
 app.use(flash());
 app.set('view engine', 'hbs');
 app.use(express.urlencoded({extended:true}))
@@ -20,7 +21,7 @@ app.use(session({
     mongoUrl: process.env.DB_PATH
   })
 }))
-
+// always write them after session
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -32,7 +33,7 @@ app.get('/', (req, res)=>{
 app.use('/login', require('./routes/login'))
 app.use('/signup', require('./routes/signup'))
 app.use('/profile', require('./routes/profile'))
-
+app.use('/resume',require('./routes/upload') )
 
 app.get('/logout', function(req, res, next) {
   req.logout(function(err) {

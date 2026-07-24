@@ -7,7 +7,9 @@ const userSchema = new Schema({
   googleID: String,
   googleAccessToken: String,
   githubId: String,
-    githubAccessToken: String
+    githubAccessToken: String,
+    filename: String,
+    path: String
 });
 
 const usermodel = mongoose.model('User', userSchema);

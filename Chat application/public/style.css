@@ -1,0 +1,341 @@
+/* =========================================================
+   Chat Application — style.css
+   Modern, responsive, interactive messenger UI.
+   Drop this file next to chat.hbs (referenced as "style.css").
+
+   NOTE for you: your /chat.js creates <li> elements inside
+   #msgList. To get the sent/received look, give each <li> a
+   class of "sent" (your own message) or "received" (others).
+   Example:
+     const li = document.createElement('li');
+     li.className = mine ? 'sent' : 'received';
+     li.innerHTML = `<span class="msg-name">${name}</span>
+                    <span class="msg-text">${msg}</span>
+                    <span class="msg-time">${time}</span>`;
+   If you don't add classes, li still styles as a neutral bubble.
+   ========================================================= */
+
+:root {
+  --bg-1: #0f1729;
+  --bg-2: #1b2a4a;
+  --accent: #10b981;
+  --accent-2: #0ea5e9;
+  --accent-grad: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
+  --sent-grad: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+  --card: #ffffff;
+  --surface: #f7f9fc;
+  --recv: #ffffff;
+  --text: #0f1729;
+  --text-soft: #64748b;
+  --border: #e6ecf2;
+  --shadow: 0 24px 70px -20px rgba(15, 23, 41, .45);
+  --radius: 22px;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #1e3a5f 0%, transparent 55%),
+    radial-gradient(1000px 500px at 110% 10%, #0e3d34 0%, transparent 50%),
+    var(--bg-1);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* ---------- App shell ---------- */
+.chat-app { width: 100%; display: flex; justify-content: center; }
+
+.chat-card {
+  width: 100%;
+  max-width: 460px;
+  height: min(92vh, 760px);
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  animation: pop-in .45s cubic-bezier(.2,.9,.3,1.2) both;
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------- Header ---------- */
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--accent-grad);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.header-avatar {
+  position: relative;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  backdrop-filter: blur(6px);
+}
+.header-avatar-initial {
+  font-weight: 800; font-size: 18px; letter-spacing: .5px;
+}
+.status-dot {
+  position: absolute; right: 1px; bottom: 1px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #34d399; border: 2.5px solid #0ea5e9;
+}
+
+.header-info { flex: 1; min-width: 0; }
+.header-title { font-size: 16px; font-weight: 700; letter-spacing: .2px; }
+.header-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; opacity: .92; font-weight: 500;
+}
+.status-pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,.7);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,.6); }
+  70% { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+
+.header-actions { display: flex; gap: 6px; }
+.icon-btn {
+  width: 38px; height: 38px; border: none; border-radius: 50%;
+  background: rgba(255,255,255,.16); color: #fff; cursor: pointer;
+  display: grid; place-items: center;
+  transition: background .2s, transform .2s;
+}
+.icon-btn:hover { background: rgba(255,255,255,.3); transform: translateY(-1px); }
+.icon-btn:active { transform: scale(.92); }
+
+/* ---------- Join screen ---------- */
+.userdetails {
+  position: absolute; inset: 0; z-index: 30;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, #ffffff 0%, var(--surface) 100%);
+  padding: 24px;
+  transition: opacity .35s ease, visibility .35s ease;
+}
+.userdetails.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.join-card {
+  width: 100%; max-width: 320px; text-align: center;
+  animation: rise .5s ease both;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.join-emoji {
+  width: 76px; height: 76px; margin: 0 auto 16px;
+  border-radius: 24px; color: #fff;
+  background: var(--accent-grad);
+  display: grid; place-items: center;
+  box-shadow: 0 16px 30px -10px rgba(16,185,129,.6);
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+.join-card h2 { font-size: 22px; font-weight: 800; letter-spacing: -.2px; }
+.join-sub { font-size: 13.5px; color: var(--text-soft); margin: 8px 0 22px; line-height: 1.55; }
+
+.userdetails input[type="text"],
+.chattingapp input[type="text"] {
+  font-family: var(--font); font-size: 15px;
+  width: 100%; padding: 14px 16px;
+  border: 1.5px solid var(--border); border-radius: 14px;
+  background: #fff; color: var(--text); outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.userdetails input[type="text"]:focus,
+.chattingapp input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(16,185,129,.14);
+}
+.userdetails input[type="text"]::placeholder,
+.chattingapp input[type="text"]::placeholder { color: #9aa7b8; }
+
+#btn {
+  width: 100%; margin-top: 14px;
+  padding: 14px; font-size: 15px; font-weight: 700;
+  color: #fff; border: none; border-radius: 14px;
+  background: var(--accent-grad); cursor: pointer;
+  box-shadow: 0 12px 24px -8px rgba(16,185,129,.55);
+  transition: transform .15s, box-shadow .2s, filter .2s;
+}
+#btn:hover { filter: brightness(1.05); transform: translateY(-2px); box-shadow: 0 18px 30px -10px rgba(16,185,129,.6); }
+#btn:active { transform: scale(.98); }
+
+/* ---------- Messages ----------
+   Sent vs Received have clearly different colors + sides:
+     .sent     -> your own messages, RIGHT side, vivid blue→teal bubble
+     .received -> everyone else's messages, LEFT side, soft white card
+   Both classes are optional; a bare <li> falls back to the "received" look.
+*/
+.messages-scroll {
+  flex: 1; min-height: 0; overflow-y: auto;
+  background:
+    radial-gradient(800px 400px at 100% 0%, rgba(14,165,233,.05), transparent 60%),
+    var(--surface);
+  padding: 18px 14px 10px;
+  scroll-behavior: smooth;
+}
+.messages-scroll::-webkit-scrollbar { width: 7px; }
+.messages-scroll::-webkit-scrollbar-thumb { background: #cfd8e3; border-radius: 99px; }
+.messages-scroll::-webkit-scrollbar-thumb:hover { background: #b6c2d2; }
+
+.msgList { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+/* default / received bubble (LEFT side, soft white) */
+.msgList li,
+.msgList li.received {
+  max-width: 76%; padding: 9px 13px;
+  align-self: flex-start;            /* LEFT */
+  background: var(--recv);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-2);   /* subtle blue accent bar */
+  border-radius: 16px 16px 16px 5px;       /* tail bottom-left */
+  font-size: 14.5px; line-height: 1.45; color: var(--text);
+  word-wrap: break-word; box-shadow: 0 2px 6px rgba(15,23,41,.05);
+  animation: msg-in .28s ease both;
+}
+
+/* sent bubble (RIGHT side, vivid blue→teal gradient) */
+.msgList li.sent {
+  align-self: flex-end;               /* RIGHT */
+  background: var(--sent-grad);
+  color: #fff; border: none;
+  border-radius: 16px 16px 5px 16px;        /* tail bottom-right */
+  box-shadow: 0 6px 16px -6px rgba(14,165,233,.55);
+}
+
+@keyframes msg-in { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+
+/* optional structured content */
+.msgList li .msg-name {
+  display: block; font-size: 12px; font-weight: 700;
+  margin-bottom: 2px; opacity: .85;
+}
+.msgList li.sent .msg-name { color: rgba(255,255,255,.9); }
+.msgList li:not(.sent) .msg-name { color: var(--accent-2); }
+
+.msgList li .msg-text { display: block; }
+.msgList li .msg-time {
+  display: block; font-size: 10.5px; margin-top: 4px;
+  text-align: right; opacity: .7;
+}
+.msgList li.sent .msg-time { color: rgba(255,255,255,.75); }
+
+/* date separator (optional <li class="day">) */
+.msgList li.day {
+  align-self: center; max-width: none;
+  background: transparent; border: none; box-shadow: none;
+  font-size: 11px; font-weight: 600; color: var(--text-soft);
+  text-transform: uppercase; letter-spacing: .5px;
+  margin: 10px 0;
+}
+
+
+/* ---------- System notices (joined / left the chat) ----------
+   <li class="system">Aarav has joined the chat</li>
+   <li class="system leave">Aarav has left the chat</li>
+*/
+.msgList li.system {
+  align-self: center; max-width: 86%;
+  background: rgba(16,185,129,.10);
+  border: 1px solid rgba(16,185,129,.28);
+  border-left: 1px solid rgba(16,185,129,.28);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .3px;
+  color: #0f766e; text-align: center;
+  box-shadow: none; margin: 6px 0;
+}
+.msgList li.system.leave {
+  background: rgba(239,68,68,.09);
+  border-color: rgba(239,68,68,.28);
+  color: #b91c1c;
+}
+.msgList li.system .msg-time { display: none; }
+
+/* online counter in the header */
+#onlineCount {
+  font-weight: 800;
+  padding: 0 2px;
+}
+.header-status { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ---------- Typing indicator ---------- */
+.typing { display: flex; padding: 2px 4px 8px; }
+.typing.hidden { display: none; }
+.typing-bubble {
+  background: var(--recv); border: 1px solid var(--border);
+  border-radius: 16px 16px 16px 5px; padding: 10px 14px;
+  display: inline-flex; gap: 4px; box-shadow: 0 2px 6px rgba(15,23,41,.05);
+}
+.typing .dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #b6c2d2;
+  animation: blink 1.3s infinite both;
+}
+.typing .dot:nth-child(2) { animation-delay: .2s; }
+.typing .dot:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%,60%,100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+
+/* ---------- Composer ---------- */
+.chattingapp {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 14px; background: #fff;
+  border-top: 1px solid var(--border); flex-shrink: 0;
+}
+.chattingapp input[type="text"] { flex: 1; border-radius: 999px; padding: 12px 16px; }
+
+.attach-btn, .send-btn {
+  border: none; cursor: pointer; display: grid; place-items: center;
+  flex-shrink: 0; transition: transform .15s, background .2s, filter .2s;
+}
+.attach-btn {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--surface); color: var(--text-soft);
+  border: 1px solid var(--border);
+}
+.attach-btn:hover { color: var(--accent); transform: translateY(-1px); }
+.send-btn {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--accent-grad); color: #fff;
+  box-shadow: 0 10px 20px -8px rgba(16,185,129,.6);
+}
+.send-btn:hover { filter: brightness(1.07); transform: translateY(-2px) rotate(-6deg); }
+.send-btn:active { transform: scale(.9); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  body { padding: 0; }
+  .chat-card { max-width: 100%; height: 100vh; border-radius: 0; }
+  .messages-scroll { padding: 14px 10px 8px; }
+  .msgList li { max-width: 82%; }
+}
+
+@media (max-width: 360px) {
+  .header-actions .icon-btn:first-child { display: none; }
+}

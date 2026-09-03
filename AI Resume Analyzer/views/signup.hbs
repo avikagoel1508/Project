@@ -1,23 +1,35 @@
+<!-- views/signup.hbs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Page</title>
+    <title>Signup - AI Resume Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Welcome to Signup page</h1>
-    <form action="/signup" method="POST">
-    <input type="text" placeholder="Enter your email address" name="email">
-    <input type="text" placeholder="Enter password" name="password">
-    <button type="submit">
-         Signup
-    </button>
-     Already a user then login
-     <button>
-        <a href="/login">Login</a>
-     </button>
-    
-    </form>
+    <div class="page-wrapper">
+        <div class="brand-line"></div>
+        <span class="ai-badge">AI Resume Analyzer</span>
+        <h1>Create account</h1>
+        <p class="subtitle">Start optimizing your resume with AI</p>
+
+        {{#if error}}
+        <div class="alert alert-error">{{error}}</div>
+        {{/if}}
+
+        <form action="/signup" method="POST">
+            <input type="text" name="name" placeholder="Full name" required>
+            <input type="email" name="email" placeholder="Enter your email address" required>
+            <input type="password" name="password" placeholder="Create password" required>
+            <input type="password" name="confirmPassword" placeholder="Confirm password" required>
+            <button type="submit">Signup</button>
+        </form>
+
+        <p class="center-text">Already a user? <a href="/login">Login</a></p>
+    </div>
 </body>
 </html>

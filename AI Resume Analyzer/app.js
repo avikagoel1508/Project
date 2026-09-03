@@ -8,7 +8,9 @@ const session=require('express-session')
 const MongoStore = require('connect-mongo').default;
 const passport=require('./auth/passport')
 
+const path = require("path");
 
+app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
 app.set('view engine', 'hbs');
 app.use(express.urlencoded({extended:true}))

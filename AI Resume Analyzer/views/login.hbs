@@ -1,32 +1,43 @@
+<!-- views/login.hbs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Login - AI Resume Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Welcome to login page</h1>
-    <form action="/login" method="POST">
-    <input type="text" placeholder="Enter your email address" name="email">
-    <input type="text" placeholder="Enter password" name="password">
-    <button type="submit">
-      Login
-    </button>
- Not a user then signup first
- <button>
-    <a href="/signup">Signup</a>
- </button>   
-    
-    </form>
+    <div class="page-wrapper">
+        <div class="brand-line"></div>
+        <span class="ai-badge">AI Resume Analyzer</span>
+        <h1>Welcome back</h1>
+        <p class="subtitle">Login to analyze and improve your resume</p>
 
-      <button class="signupbtn">
-                
-                <a href="/login/google">Google-login</a>
-            </button>
-      <button class="signupbtn">
-                
-                <a href="/login/github">Github-login</a>
-            </button>
+        {{#if error}}
+        <div class="alert alert-error">{{error}}</div>
+        {{/if}}
+
+        <form action="/login" method="POST">
+            <input type="email" name="email" placeholder="Enter your email address" required>
+            <input type="password" name="password" placeholder="Enter password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="center-text">New here? <a href="/signup">Create an account</a></p>
+        <div class="oauth-buttons">
+  <a href="/login/google" class="oauth-btn google">
+    <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18"> Continue with Google
+  </a>
+  <a href="/login/github" class="oauth-btn github">
+    <img src="https://www.svgrepo.com/show/512317/github-142.svg" width="18"> Continue with GitHub
+  </a>
+</div>
+<div class="divider"><span>or</span></div>
+
+    </div>
 </body>
 </html>

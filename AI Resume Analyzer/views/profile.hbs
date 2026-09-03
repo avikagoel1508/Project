@@ -1,20 +1,41 @@
+<!-- views/profile.hbs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile page</title>
+    <title>Profile - AI Resume Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Welcome to the profile page</h1>
-    <form action="/resume/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="resume" >
-    <button>Upload</button>
-    </form>
-    <button>
-        <a href="/logout">
-        Logout
-        </a>
-    </button>
+    <div class="analysis-wrapper">
+        <div class="brand-line"></div>
+        <span class="ai-badge">AI Powered</span>
+        <h1>Your Profile</h1>
+        <p class="subtitle">Upload your resume to get AI feedback</p>
+
+        {{#if success}}
+        <div class="alert alert-success">{{success}}</div>
+        {{/if}}
+        {{#if error}}
+        <div class="alert alert-error">{{error}}</div>
+        {{/if}}
+
+        <div class="card">
+            <h2 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--text);">Upload Resume</h2>
+            <form action="/resume/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="resume" accept=".pdf" required>
+                <button type="submit">Analyze Resume</button>
+            </form>
+        </div>
+
+        <div class="actions" style="margin-top: 1.5rem;">
+            
+            <button class="small secondary"><a href="/logout">Logout</a></button>
+        </div>
+    </div>
 </body>
 </html>

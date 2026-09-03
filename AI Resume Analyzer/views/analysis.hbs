@@ -1,0 +1,61 @@
+<!-- views/analysis.hbs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis - AI Resume Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="analysis-wrapper">
+        <div class="brand-line"></div>
+        <span class="ai-badge">Analysis Complete</span>
+        <h1>Resume Analysis</h1>
+        <p class="subtitle">AI-powered insights and recommendations</p>
+
+        <div class="chat-card">
+           <h2>Overall Score</h2>
+<p>{{analysis.overallScore}}</p>
+
+<h2>Strengths</h2>
+<ul>
+{{#each analysis.strengths}}
+    <li>{{this}}</li>
+{{/each}}
+</ul>
+
+<h2>Weaknesses</h2>
+<ul>
+{{#each analysis.weaknesses}}
+    <li>{{this}}</li>
+{{/each}}
+</ul>
+
+<h2>Missing Skills</h2>
+<ul>
+{{#each analysis.missingSkills}}
+    <li>{{this}}</li>
+{{/each}}
+</ul>
+
+<h2>Suggestions</h2>
+<ul>
+{{#each analysis.suggestions}}
+    <li>{{this}}</li>
+{{/each}}
+</ul>
+        </div>
+
+        <div class="actions">
+            <button class="small"><a href="/profile">Back to Profile</a></button>
+           <button class="small secondary">
+    <a href="/profile">Analyze Another Resume</a>
+</button>
+        </div>
+    </div>
+</body>
+</html>

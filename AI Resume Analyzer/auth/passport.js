@@ -27,7 +27,7 @@ mypassport.use(new LocalStrategy(
 mypassport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:4444/login/auth/google/callback"
+    callbackURL: (process.env.BASE_URL || "http://localhost:4444") + "/login/auth/google/callback"
   },
   async function(accessToken, refreshToken, profile, cb) {
        let user=await User.findOne({ googleId: profile.id })
@@ -57,7 +57,7 @@ mypassport.use(new GoogleStrategy({
 mypassport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://localhost:4444/login/auth/github/callback"
+    callbackURL: (process.env.BASE_URL || "http://localhost:4444") + "/login/auth/github/callback"
   },
   async function(accessToken, refreshToken, profile, done) {
      let user=await User.findOne({ githubId: profile.id })
